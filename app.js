@@ -5,12 +5,13 @@ const abscenceRoutes = require('./routes/abscence');
 const adminRoutes = require('./routes/administration');
 const classRoutes = require('./routes/class');
 const classroomRoutes = require('./routes/classroom');
-const sAssignmentRoutes = require('./routes/aAssignment');
+const sAssignmentRoutes = require('./routes/sAssignment');
 const studentRoutes = require('./routes/student');
 const subjectRoutes = require('./routes/subject');
 const tAssignmentRoutes = require('./routes/tAssignment');
 const teacherRoutes = require('./routes/teacher');
 const timeTableRoutes = require('./routes/timeTable');
+
 
 
 const app = express();
@@ -33,6 +34,15 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/abscence', abscenceRoutes);
-app.use('/api/auth', classRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/class', classRoutes);
+app.use('/api/classroom', classroomRoutes);
+app.use('/api/sAssignment', sAssignmentRoutes);
+app.use('/api/student', studentRoutes);
+app.use('/api/subject', subjectRoutes);
+app.use('/api/tAssignment', tAssignmentRoutes);
+app.use('/api/teacher', teacherRoutes);
+app.use('/api/timeTable', timeTableRoutes);
+
 
 module.exports = app;
