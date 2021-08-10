@@ -6,4 +6,4 @@ id_student: {type :Number,  required: true},
 id_class:{ type: Number, required: true}
 });
 
-module.exports = mongoose.model('Classroom', asgStudentSchema);
+module.exports = mongoose.model('AsgStudent', asgStudentSchema);

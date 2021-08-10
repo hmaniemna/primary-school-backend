@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const thingSchema = mongoose.Schema({
+const abscenceSchema = mongoose.Schema({
   id: { type: int, required: true },
   id_student: { type: int, required: true },
   day: { type: String, required: true },
@@ -9,4 +9,4 @@ const thingSchema = mongoose.Schema({
   
 });
 
-module.exports = mongoose.model('Thing', thingSchema);
+module.exports = mongoose.model('Abscence', abscenceSchema);

@@ -15,7 +15,7 @@ const timeTableRoutes = require('./routes/timeTable');
 
 
 const app = express();
-mongoose.connect('mongodb+srv://sara:sara.1999.@cluster0.lm7i1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://salma:wDBjx9Uavxp0f4an@cluster0.nk1tj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{ useNewUrlParser: true })
 .then(() => {
   console.log('successfuly connected to MongoDB Atlas');
 })

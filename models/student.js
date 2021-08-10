@@ -8,4 +8,4 @@ gender: {type:Number, required:true},
 birthDate: {type:Date, required : true},
 Inscription_nb:{type: Number, required: true}
 });
-module.exports = mongoose.model('student', studentSchema);
+module.exports = mongoose.model('Student', studentSchema);
