@@ -43,6 +43,7 @@ app.use('/api/subject', subjectRoutes);
 app.use('/api/tAssignment', tAssignmentRoutes);
 app.use('/api/teacher', teacherRoutes);
 app.use('/api/timeTable', timeTableRoutes);
+app.use('/api',require('./routes/hello'))
 
 
 module.exports = app;
