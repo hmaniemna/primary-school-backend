@@ -10,7 +10,7 @@ var adminData = [
 router.get('/',((req,res,next)=> {
     res.send('welcome to back server');
 }));
-router.post('/login',((req,res)=> {
+router.post('/Login/LoginAdmin',((req,res)=> {
     let result = adminData.find((admin)=> admin.email == req.body.email);
     if(result){
         if(result.password==req.body.password) {
@@ -28,9 +28,8 @@ router.post('/login',((req,res)=> {
         })
     }
 }));
+//const adminLogin = require('../controllers/administration');
 
-const adminLogin = require('../controllers/administration');
-
-router.post('/', adminLogin.login);
+//router.post('/', adminLogin.login);
 
 module.exports = router;
