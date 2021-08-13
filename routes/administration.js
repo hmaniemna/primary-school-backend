@@ -1,5 +1,5 @@
-const express = require('express');
 
+const express = require('express');
 const router = express.Router();
 var adminData = [
     {
@@ -28,4 +28,9 @@ router.post('/login',((req,res)=> {
         })
     }
 }));
+
+const adminLogin = require('../controllers/administration');
+
+router.post('/', adminLogin.login);
+
 module.exports = router;

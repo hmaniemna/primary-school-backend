@@ -24,6 +24,8 @@ mongoose.connect('mongodb+srv://salma:wDBjx9Uavxp0f4an@cluster0.nk1tj.mongodb.ne
   console.error(error);
 });
 
+
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -45,6 +47,8 @@ app.use('/', require('./routes/teacher'));
 app.use('/login', require('./routes/administration'));
 app.use('/api/timeTable', timeTableRoutes);
 app.use('/api',require('./routes/hello'));
+app.use('/Login/LoginAdmin',adminRoutes);
+
 
 
 module.exports = app;

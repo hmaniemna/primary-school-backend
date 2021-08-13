@@ -9,4 +9,5 @@ const adminstartionSchema = mongoose.Schema({
  pwd:{type :String,  required: true}
 });
 
+
 module.exports = mongoose.model('Administration', adminstartionSchema);
