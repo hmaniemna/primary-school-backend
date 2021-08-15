@@ -1,3 +1,5 @@
+/*
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -51,4 +53,4 @@ app.use('/Login/LoginAdmin',adminRoutes);
 
 
 
-module.exports = app;
+module.exports = app; */
