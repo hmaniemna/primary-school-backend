@@ -46,7 +46,7 @@ app.use('/api/student', studentRoutes);
 app.use('/api/subject', subjectRoutes);
 app.use('/api/tAssignment', tAssignmentRoutes);
 app.use('/', require('./routes/teacher'));
-app.use('/login', require('./routes/administration'));
+app.use('/Login/LoginAdmin', require('./routes/administration'));
 app.use('/api/timeTable', timeTableRoutes);
 app.use('/api',require('./routes/hello'));
 app.use('/Login/LoginAdmin',adminRoutes);
