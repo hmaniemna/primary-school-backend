@@ -15,6 +15,7 @@ const normalizePort = val => {
   }
   return false;
 };
+app.use('/api/',require('./routes/hello'))
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
