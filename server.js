@@ -1,10 +1,18 @@
 const express = require('express');
 const mysql= require('mysql');
-//const cors = require("cors");
 const app=express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
-var connection= mysql.createConnection({
+
+const db = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "salma",
+  database: "teacher_db",
+  port : 3001
+})
+
+/*var connection= mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "salma",
@@ -30,6 +38,14 @@ connection.query('CREATE TABLE IF NOT EXISTS `salle` (`id_salle` INT(11) UNSIGNE
     console.log(rows);
   }
 })
+connection.query('CREATE TABLE IF NOT EXISTS `test1` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
+  if(err){
+    throw err;
+  }else{
+    console.log('DATA SET');
+    console.log(rows);
+  }
+})
 
 /*connection.query('INSERT INTO `salle` (`libelle`) VALUES ("salma")',(err,rows)=>{
   if(err){
@@ -39,24 +55,39 @@ connection.query('CREATE TABLE IF NOT EXISTS `salle` (`id_salle` INT(11) UNSIGNE
     console.log(rows);
   }
 })*/
+db.query('CREATE TABLE IF NOT EXISTS `test1` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
+  if(err){
+    throw err;
+  }else{
+    console.log('DATA SET');
+    console.log(rows);
+  }
+})
+app.get('/',(req,res)=>{
+  const sqlInsert = `INSERT INTO teacher_db.enseignant (genre,prenom,nom,login,mdp) VALUES ('female',salma','tek,'salmatek',fff');`
+  db.query(sqlInsert,(err,result)=>{
+    console.log("inserted");
+    res.send("hello world!!");
+  })
+})
 
-app.post("http://localhost3000/register",(req,res)=>{
+/*app.post("http://localhost3000/register",(req,res)=>{
 
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const username = req.body.username;
   const passwd = req.body.passwd;
-  const gen = req.body.gen;
+  const gender = req.body.gen;
   
 
   connection.query(
     "INSERT INTO `teacher_db`.`enseignant` (`genre`, `prenom`, `nom`, `login`, `mdp`) VALUES (?,?,?,?,?)",
-    [gen,firstname,lastname,username,passwd],
+    [gender,firstname,lastname,username,passwd],
     (err,result)=>{
       console.log(err);
     }
   )
-})
+})*/
 app.listen(port);
 console.log('app is listening on port'+port);
 
