@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql= require('mysql');
-//const cors = require("cors");
+const cors = require("cors");
 const app=express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
@@ -20,7 +20,9 @@ connection.connect((err)=>{
   }
 })
 
-
+process.on('uncaughtException', function (err) {
+  console.log(err);
+}); 
 
 connection.query('CREATE TABLE IF NOT EXISTS `salle` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
   if(err){
@@ -29,14 +31,14 @@ connection.query('CREATE TABLE IF NOT EXISTS `salle` (`id_salle` INT(11) UNSIGNE
     console.log('DATA SET');
     console.log(rows);
   }
-<<<<<<< HEAD
+
   if (port >= 0) {
     return port;
   }
   return false;
-};
+});
 app.use('/api/',require('./routes/hello'))
-const port = normalizePort(process.env.PORT || '3000');
+//const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -56,8 +58,8 @@ const errorHandler = error => {
       break;
     default:
       throw error;
-=======
-})
+
+}
 
 /*connection.query('INSERT INTO `salle` (`libelle`) VALUES ("salma")',(err,rows)=>{
   if(err){
@@ -65,7 +67,7 @@ const errorHandler = error => {
   }else{
     console.log('INSERT');
     console.log(rows);
->>>>>>> a4aa227d4cb7fb6f54ce17b92587872a98f97c82
+
   }
 })*/
 
@@ -100,4 +102,4 @@ console.log('app is listening on port'+port);
 app.listen(3001,()=>{
   console.log('running on port 3001');
 });*/
-
+}
