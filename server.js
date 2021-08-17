@@ -1,12 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const mysql= require('mysql');
-<<<<<<< HEAD
-=======
+
 const cors = require("cors");
->>>>>>> dc2e949f38b733bda508b2211a42e4469a4aecb8
+
 const app=express();
 const port = process.env.PORT || 3000;
+app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({extended : true})); 
 
 const db = mysql.createPool({
   host: "localhost",
@@ -43,7 +45,7 @@ connection.query('CREATE TABLE IF NOT EXISTS `salle` (`id_salle` INT(11) UNSIGNE
     console.log('DATA SET');
     console.log(rows);
   }
-<<<<<<< HEAD
+
 })
 connection.query('CREATE TABLE IF NOT EXISTS `test1` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
   if(err){
@@ -94,39 +96,44 @@ const errorHandler = error => {
 
   }
 })*/
-db.query('CREATE TABLE IF NOT EXISTS `test1` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
-  if(err){
-    throw err;
-  }else{
-    console.log('DATA SET');
-    console.log(rows);
-  }
-})
-app.get('/',(req,res)=>{
-  const sqlInsert = `INSERT INTO teacher_db.enseignant (genre,prenom,nom,login,mdp) VALUES ('female',salma','tek,'salmatek',fff');`
+
+/*app.post('/',(req,res)=>{
+  const genre = req.body.genre;
+  const prenom = req.body.prenom;
+  const nom = req.body.nom;
+  const login = req.body.login;
+  const mdp = req.body.mdp;
+  const sqlInsert = 'INSERT INTO `enseignant` (genre,prenom,nom,login,mdp) VALUES (?,?,?,?,?)'
+  db.query(sqlInsert,[genre,prenom,nom,login,mdp],(err,result)=>{
+      console.log(result);
+  })
+});*/
+
+/*app.get('/register',(req,res)=>{
+  const sqlInsert = 'INSERT INTO `enseignant` (genre,prenom,nom,login,mdp) VALUES ("female","salma","tek","salmatek","hhh")'
   db.query(sqlInsert,(err,result)=>{
     console.log("inserted");
     res.send("hello world!!");
   })
-})
-
-/*app.post("http://localhost3000/register",(req,res)=>{
-
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const username = req.body.username;
-  const passwd = req.body.passwd;
-  const gender = req.body.gen;
-  
-
-  connection.query(
-    "INSERT INTO `teacher_db`.`enseignant` (`genre`, `prenom`, `nom`, `login`, `mdp`) VALUES (?,?,?,?,?)",
-    [gender,firstname,lastname,username,passwd],
-    (err,result)=>{
-      console.log(err);
-    }
-  )
 })*/
+
+app.post('http://localhost:3000/register',(req,res)=>{
+  const genre1 = req.body.genre;
+  const prenom1 = req.body.prenom;
+  const nom1 = req.body.nom;
+  const login1 = req.body.login;
+  const mdp1 = req.body.mdp;
+  const sqlInsert = 'INSERT INTO `enseignant` (`prenom`,`nom`,`login`,`mdp`,`genre`) VALUES (?,?,?,?,?)'
+  db.query(sqlInsert,[prenom1,nom1,login1,mdp1,genre1],(err,rows)=>{
+    if(err){
+      throw err;
+    }else{
+      console.log('INSERT');
+      console.log(rows);
+  
+    }
+  })
+});
 app.listen(port);
 console.log('app is listening on port'+port);
 
@@ -141,4 +148,4 @@ console.log('app is listening on port'+port);
 app.listen(3001,()=>{
   console.log('running on port 3001');
 });*/
-}
+

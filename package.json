@@ -1,50 +1,24 @@
 {
-<<<<<<< HEAD
     "name": "backend",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
     "dependencies": {
-      "bcrypt": "^5.0.1",
-      "body-parser": "^1.19.0",
-      "cors": "^2.8.5",
-      "express": "^4.17.1",
-      "jsonwebtoken": "^8.5.1",
-      "mongoose": "^5.13.5",
-      "mongoose-unique-validator": "^2.0.3",
-      "multer": "^1.4.2",
-      "mysql": "^2.18.1"
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.13.5",
+        "mongoose-unique-validator": "^2.0.3",
+        "multer": "^1.4.2",
+        "mysql": "^2.18.1"
     },
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "devStart": "nodemon server.js",
-      "start": "node server.js"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "devStart": "nodemon server.js",
+        "start": "node server.js"
     },
     "author": "",
     "license": "ISC"
-  }
-=======
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5",
-    "mongoose-unique-validator": "^2.0.3",
-    "multer": "^1.4.2",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC"
 }
->>>>>>> dc2e949f38b733bda508b2211a42e4469a4aecb8
