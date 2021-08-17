@@ -1,23 +1,33 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql= require('mysql');
+<<<<<<< HEAD
 
 const cors = require("cors");
 
+=======
+const bodyparser = require('body-parser');
+//const cors = require("cors");
+>>>>>>> 4966353b39af0e0ec8dd6c2b1eca25a24392fcf8
 const app=express();
 const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended : true})); 
 
+
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "salma",
-  database: "teacher_db",
-  port : 3001
+  database: "mydb",
+  port : 3306
 })
-
+app.post('/api/insert',(req,res)=>{
+  const sqlInsert="INSERT INTO classe (niveau,nom,nb,anneescolaire) VALUES (?,?,?,?)"
+  db.query(sqlInsert,[n,l,nb,a],(err,res)=>{
+  })
+})
 /*var connection= mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -26,14 +36,14 @@ const db = mysql.createPool({
   port:"3001"
 })
 
-connection.connect((err)=>{
+db.connect((err)=>{
   if(err){
     throw err;
   }else{
     console.log("connected");
   }
 })
-
+/*
 process.on('uncaughtException', function (err) {
   console.log(err);
 }); 
@@ -46,8 +56,13 @@ connection.query('CREATE TABLE IF NOT EXISTS `salle` (`id_salle` INT(11) UNSIGNE
     console.log(rows);
   }
 
+<<<<<<< HEAD
 })
 connection.query('CREATE TABLE IF NOT EXISTS `test1` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
+=======
+})*/
+db.query('CREATE TABLE IF NOT EXISTS `test2` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
+>>>>>>> 4966353b39af0e0ec8dd6c2b1eca25a24392fcf8
   if(err){
     throw err;
   }else{
@@ -55,7 +70,7 @@ connection.query('CREATE TABLE IF NOT EXISTS `test1` (`id_salle` INT(11) UNSIGNE
     console.log(rows);
   }
 })
-=======
+/*
 
   if (port >= 0) {
     return port;
@@ -85,7 +100,6 @@ const errorHandler = error => {
       throw error;
 
 }
->>>>>>> dc2e949f38b733bda508b2211a42e4469a4aecb8
 
 /*connection.query('INSERT INTO `salle` (`libelle`) VALUES ("salma")',(err,rows)=>{
   if(err){
@@ -96,6 +110,7 @@ const errorHandler = error => {
 
   }
 })*/
+<<<<<<< HEAD
 
 /*app.post('/',(req,res)=>{
   const genre = req.body.genre;
@@ -111,11 +126,39 @@ const errorHandler = error => {
 
 /*app.get('/register',(req,res)=>{
   const sqlInsert = 'INSERT INTO `enseignant` (genre,prenom,nom,login,mdp) VALUES ("female","salma","tek","salmatek","hhh")'
+=======
+/*db.query('CREATE TABLE IF NOT EXISTS `test1` (`id_salle` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,`libelle` VARCHAR(100) NOT NULL)',(err,rows)=>{
+  if(err){
+    throw err;
+  }else{
+    console.log('DATA SET');
+    console.log(rows);
+  }
+})*/
+app.get('/',(req,res)=>{
+  const sqlInsert = `INSERT INTO teacher_db.enseignant (genre,prenom,nom,login,mdp) VALUES ('female',salma','tek,'salmatek',fff');`
+>>>>>>> 4966353b39af0e0ec8dd6c2b1eca25a24392fcf8
   db.query(sqlInsert,(err,result)=>{
     console.log("inserted");
     res.send("hello world!!");
   })
+<<<<<<< HEAD
 })*/
+=======
+})
+//get elements from table salle 
+app.get('/salle',(res,req)=>{
+  db.query('SELECT * FROM salle',(err,rows,fields)=>{
+    if (!err){
+      console.log(rows)
+    }else{
+      console.log(err)
+    }
+  })
+})
+
+/*app.post("http://localhost3000/register",(req,res)=>{
+>>>>>>> 4966353b39af0e0ec8dd6c2b1eca25a24392fcf8
 
 app.post('http://localhost:3000/register',(req,res)=>{
   const genre1 = req.body.genre;
