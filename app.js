@@ -1,3 +1,5 @@
+/*
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -43,11 +45,12 @@ app.use('/api/sAssignment', sAssignmentRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/subject', subjectRoutes);
 app.use('/api/tAssignment', tAssignmentRoutes);
-app.use('/api/teacher', teacherRoutes);
+app.use('/', require('./routes/teacher'));
+app.use('/Login/LoginAdmin', require('./routes/administration'));
 app.use('/api/timeTable', timeTableRoutes);
 app.use('/api',require('./routes/hello'));
-
 app.use('/Login/LoginAdmin',adminRoutes);
 
 
-module.exports = app;
+
+module.exports = app; */
