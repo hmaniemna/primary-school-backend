@@ -18,13 +18,8 @@ const db = mysql.createPool({
   port : 3306
 })
 
-app.get('/api/get',(req,res)=>{
-  const sqlSelect="SELECT * FROM salle"
-  db.query(sqlInsert,(err,result)=>{
-    res.send(result)
-  })
-})
 
+//ADDC
 app.post('/api/insert',(req,res)=>{
 
   const name1 = req.body.name
@@ -37,6 +32,14 @@ app.post('/api/insert',(req,res)=>{
   })
 });
 
+app.get('/api/get',(req,res)=>{
+  const sqlSelect="SELECT * FROM `classe`"
+  db.query(sqlSelect,(err,result)=>{
+    console.log('SENT')
+    res.send(result)
+  })
+})
+// ADDT
 app.post('http://localhost:3000/register',(req,res)=>{
   const genre1 = req.body.genre;
   const prenom1 = req.body.prenom;
@@ -51,17 +54,6 @@ app.post('http://localhost:3000/register',(req,res)=>{
     }else{
       console.log('INSERT');
       console.log(rows);
-    }
-  })
-})
-
-//get elements from table salle 
-app.get('/salle',(res,req)=>{
-  db.query('SELECT * FROM salle',(err,rows,fields)=>{
-    if (!err){
-      console.log(rows)
-    }else{
-      console.log(err)
     }
   })
 })
