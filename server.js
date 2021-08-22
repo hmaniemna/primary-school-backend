@@ -19,7 +19,14 @@ const db = mysql.createPool({
 })
 
 
-//ADDC
+//CLASS MANAGMENT
+
+//import class router!
+//const classRoute= require('./routes/class')
+
+//create class router!
+//app.use('/api/class',classRoute)
+
 app.post('/api/insert',(req,res)=>{
 
   const name1 = req.body.name
@@ -39,6 +46,11 @@ app.get('/api/get',(req,res)=>{
     res.send(result)
   })
 })
+
+//app.put()
+
+//app.delete()
+
 // ADDT
 app.post('http://localhost:3000/register',(req,res)=>{
   const genre1 = req.body.genre;
