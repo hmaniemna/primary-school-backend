@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql= require('mysql');;
+const mysql= require('mysql'); 
 const cors = require("cors");
 const app=express();
 const port = process.env.PORT || 3000;
@@ -16,7 +16,7 @@ const db = mysql.createPool({
   database: "teacher_db",
   port : 3001
 })
-app.post('/api/insert',(req,res)=>{
+/*app.post('/api/insert',(req,res)=>{
   const sqlInsert="INSERT INTO classe (niveau,nom,nb,anneescolaire) VALUES (?,?,?,?)"
   db.query(sqlInsert,[n,l,nb,a],(err,res)=>{
   })
@@ -28,7 +28,7 @@ app.get('/',(req,res)=>{
     res.send("hello world!!");
   })
 
-})
+}) */
 
 //get elements from table salle 
 app.get('/salle',(res,req)=>{
@@ -48,12 +48,59 @@ app.get('/getTeachers',(req,res)=>{
   });
 },[]);
 
-app.post('/register',(req,res)=>{
+
+//CLASS MANAGMENT
+
+//import class router!
+//const classRoute= require('./routes/class')
+
+//create class router!
+//app.use('/api/class',classRoute)
+
+app.post('/api/insert',(req,res)=>{
+
+  const name1 = req.body.name
+  const level1=req.body.level
+  const number1=req.body.number
+  const an= "21/22"
+  const sqlInsert="INSERT INTO `classe` (`niveau`,`nom`,`nb`,`anneescolaire`) VALUES (?,?,?,?)"
+  db.query(sqlInsert,[level1,name1,number1,an],(err,rows)=>{
+    console.log('INSERTED CLASS');
+    console.log(rows);
+  })
+});
+
+app.get('/api/get',(req,res)=>{
+  const sqlSelect="SELECT * FROM `classe`"
+  db.query(sqlSelect,(err,result)=>{
+    console.log('SENT CLASS')
+    res.send(result)
+  })
+})
+
+//app.put()
+
+//DeleteClasse
+app.delete('/api/delete/:id',(req,res)=>{
+  const id1 = req.params.id;
+  const sqlDelete = 'DELETE FROM `classe` WHERE `id_classe`=?'
+  db.query(sqlDelete,id1,(err,result)=>{
+    if (err) console.log(err);
+    console.log('class deleted!');
+    console.log(id1);
+  
+    
+  })
+})
+
+// ADDT
+app.post('http://localhost:3000/register',(req,res)=>{
   const genre1 = req.body.genre;
   const prenom1 = req.body.prenom;
   const nom1 = req.body.nom;
   const login1 = req.body.login;
   const mdp1 = req.body.mdp;
+
   const sqlInsert = 'INSERT INTO `teacher_db`.`enseignant` (`prenom`,`nom`,`login`,`mdp`,`genre`) VALUES (?,?,?,?,?)'
   db.query(sqlInsert,[prenom1,nom1,login1,mdp1,genre1],(err,rows)=>{
     if(err){
@@ -61,12 +108,26 @@ app.post('/register',(req,res)=>{
     }else{
       console.log('inserted successfully!');
       console.log(rows);
-  
     }
   })
-});
+})
+// DeleteTeacher
+app.delete('/deleteTeacher/:login',(req,res)=>{
+  const login1 = req.params.login;
+  const sqlDelete = 'DELETE FROM `teacher_db`.`enseignant` WHERE `login`=?'
+  db.query(sqlDelete,login1,(err,result)=>{
+    if (err) console.log(err);
+    console.log('teacher deleted!');
+    
+  })
+})
+
+
+
+
 app.listen(port);
 console.log('app is listening on port'+port);
+
 
 
 /*app.get('/',(req,res)=>{
@@ -77,4 +138,6 @@ console.log('app is listening on port'+port);
 });
 }
 )
+
 */
+

@@ -1,11 +1,22 @@
-const mongoose = require('mongoose');
+/*var dbConn=require('../config/db.config');
 
-const classSchema = mongoose.Schema({
-  idClass: { type: Number, required: true, unique: true  },
-  level : { type: Number, required: true },
-  name : { type: String, required: true },
-  number: { type:String, required: true },
-  schoolYear: { type:String, required: true } 
-});
+var Classes = function (Class) {
+  this.niveau= Class.niveau;
+  this.nom=Class.nom;
+  this.nb=Class.nb;
 
-module.exports = mongoose.model('Class', classSchema);
+}
+
+Class.getAllClasses=(result)=>{
+  dbConn.query('SELECT * FROM `classe`',(err,res)=>{
+    if(err){
+      console.log('error while fetching classes: ', err);
+      result(NULL,err);
+    }else{
+      console.log('Classes fetched Succssefully ');
+      result(NULL,res);
+    }
+  })
+}
+
+module.exports= Classes;*/
