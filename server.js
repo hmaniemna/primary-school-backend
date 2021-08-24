@@ -51,12 +51,6 @@ app.get('/getTeachers',(req,res)=>{
 
 //CLASS MANAGMENT
 
-//import class router!
-//const classRoute= require('./routes/class')
-
-//create class router!
-//app.use('/api/class',classRoute)
-
 app.post('/api/insert',(req,res)=>{
 
   const name1 = req.body.name
@@ -65,15 +59,24 @@ app.post('/api/insert',(req,res)=>{
   const an= "21/22"
   const sqlInsert="INSERT INTO `classe` (`niveau`,`nom`,`nb`,`anneescolaire`) VALUES (?,?,?,?)"
   db.query(sqlInsert,[level1,name1,number1,an],(err,rows)=>{
+<<<<<<< HEAD
     console.log('INSERTED CLASS');
     console.log(rows);
+=======
+    console.log('INSERTED');
+    console.log(err)
+>>>>>>> b4b94407e03d619f3ef43655390cb21506e8e0b2
   })
 });
 
 app.get('/api/get',(req,res)=>{
   const sqlSelect="SELECT * FROM `classe`"
   db.query(sqlSelect,(err,result)=>{
+<<<<<<< HEAD
     console.log('SENT CLASS')
+=======
+    console.log('Data fetched')
+>>>>>>> b4b94407e03d619f3ef43655390cb21506e8e0b2
     res.send(result)
   })
 })
