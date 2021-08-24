@@ -21,12 +21,6 @@ const db = mysql.createPool({
 
 //CLASS MANAGMENT
 
-//import class router!
-//const classRoute= require('./routes/class')
-
-//create class router!
-//app.use('/api/class',classRoute)
-
 app.post('/api/insert',(req,res)=>{
 
   const name1 = req.body.name
@@ -36,13 +30,14 @@ app.post('/api/insert',(req,res)=>{
   const sqlInsert="INSERT INTO `classe` (`niveau`,`nom`,`nb`,`anneescolaire`) VALUES (?,?,?,?)"
   db.query(sqlInsert,[level1,name1,number1,an],(err,rows)=>{
     console.log('INSERTED');
+    console.log(err)
   })
 });
 
 app.get('/api/get',(req,res)=>{
   const sqlSelect="SELECT * FROM `classe`"
   db.query(sqlSelect,(err,result)=>{
-    console.log('SENT')
+    console.log('Data fetched')
     res.send(result)
   })
 })
