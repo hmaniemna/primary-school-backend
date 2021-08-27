@@ -115,8 +115,7 @@ app.delete('/deleteTeacher/:login',(req,res)=>{
   const sqlDelete = 'DELETE FROM `enseignant` WHERE `login`=?'
   db.query(sqlDelete,login1,(err,result)=>{
     if (err) console.log(err);
-    console.log('teacher deleted!');
-    
+    console.log('teacher deleted!');  
   })
 })
 
