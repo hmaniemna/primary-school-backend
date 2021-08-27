@@ -41,12 +41,7 @@ app.get('/salle',(res,req)=>{
   })
 })
 
-app.get('/getTeachers',(req,res)=>{
-  const sqlSelect = "SELECT * FROM `teacher_db`.`enseignant`"
-  db.query(sqlSelect,(err,result)=>{
-    res.send(result); 
-  });
-},[]);
+
 
 
 //CLASS MANAGMENT
@@ -59,24 +54,16 @@ app.post('/api/insert',(req,res)=>{
   const an= "21/22"
   const sqlInsert="INSERT INTO `classe` (`niveau`,`nom`,`nb`,`anneescolaire`) VALUES (?,?,?,?)"
   db.query(sqlInsert,[level1,name1,number1,an],(err,rows)=>{
-<<<<<<< HEAD
     console.log('INSERTED CLASS');
-    console.log(rows);
-=======
-    console.log('INSERTED');
-    console.log(err)
->>>>>>> b4b94407e03d619f3ef43655390cb21506e8e0b2
+    console.log(err);
   })
 });
 
 app.get('/api/get',(req,res)=>{
   const sqlSelect="SELECT * FROM `classe`"
   db.query(sqlSelect,(err,result)=>{
-<<<<<<< HEAD
     console.log('SENT CLASS')
-=======
     console.log('Data fetched')
->>>>>>> b4b94407e03d619f3ef43655390cb21506e8e0b2
     res.send(result)
   })
 })
@@ -95,21 +82,26 @@ app.delete('/api/delete/:id',(req,res)=>{
     
   })
 })
-
+app.get('/getTeachers',(req,res)=>{
+  const sqlSelect = "SELECT * FROM `enseignant`"
+  db.query(sqlSelect,(err,result)=>{
+    res.send(result); 
+    console.log('teacher sent!');
+  });
+},[]);
 // ADDT
-app.post('http://localhost:3000/register',(req,res)=>{
+app.post('/registerTeacher',(req,res)=>{
   const genre1 = req.body.genre;
   const prenom1 = req.body.prenom;
   const nom1 = req.body.nom;
   const login1 = req.body.login;
   const mdp1 = req.body.mdp;
-
-  const sqlInsert = 'INSERT INTO `teacher_db`.`enseignant` (`prenom`,`nom`,`login`,`mdp`,`genre`) VALUES (?,?,?,?,?)'
+  const sqlInsert = 'INSERT INTO `enseignant` (`prenom`,`nom`,`login`,`mdp`,`genre`) VALUES (?,?,?,?,?)'
   db.query(sqlInsert,[prenom1,nom1,login1,mdp1,genre1],(err,rows)=>{
     if(err){
-      throw err;
+      console.log(err);
     }else{
-      console.log('inserted successfully!');
+      console.log('inserted teacher successfully!');
       console.log(rows);
     }
   })
@@ -117,7 +109,7 @@ app.post('http://localhost:3000/register',(req,res)=>{
 // DeleteTeacher
 app.delete('/deleteTeacher/:login',(req,res)=>{
   const login1 = req.params.login;
-  const sqlDelete = 'DELETE FROM `teacher_db`.`enseignant` WHERE `login`=?'
+  const sqlDelete = 'DELETE FROM `enseignant` WHERE `login`=?'
   db.query(sqlDelete,login1,(err,result)=>{
     if (err) console.log(err);
     console.log('teacher deleted!');
@@ -125,6 +117,54 @@ app.delete('/deleteTeacher/:login',(req,res)=>{
   })
 })
 
+/*app.put('/updateTeacher',(req,res)=>{
+  const id1 = req.body.id_classe;
+  const genre1 = req.body.genre;
+  const prenom1 = req.body.prenom;
+  const nom1 = req.body.nom;
+  const login1 = req.body.login;
+  const mdp1 = req.body.mdp;
+  const sqlUpdate = 'UPDATE SET `teacher_db`.`enseignant``prenom`=?,`nom`=?,`login`=?,`genre`=? WHERE `mdp`=?'
+  db.query(sqlUpdate,[prenom1,nom1,login1,genre1,mdp1],(err,result)=>{
+    if (err) console.log(err);
+    console.log('teacher UPDATED!!');
+    
+  })
+})*/
+
+app.put('/updateFirstname',(req,res)=>{
+  const prenom1 = req.body.prenom;
+  const login1 = req.body.login;
+  const sqlUpdate = 'UPDATE SET `enseignant``prenom`=? WHERE `login`=?'
+  db.query(sqlUpdate,[prenom1,login1],(err,result)=>{
+    if (err) console.log(err);
+    console.log('teacher UPDATED!!');
+    
+  })
+})
+//timetable
+app.get('/getTimetable',(req,res)=>{
+  const sqlSelect = "SELECT * FROM `emploi`"
+  db.query(sqlSelect,(err,result)=>{
+    res.send(result); 
+    console.log('timetable sent!');
+  });
+},[]);
+app.post('/registerTimetable',(req,res)=>{
+  const date1 = req.body.genre;
+  const heured1 = req.body.prenom;
+  const heuref1 = req.body.nom;
+  const matiere1 = req.body.login;
+  const sqlInsert = 'INSERT INTO `enseignant` (`jour`,`heure_debut`,`heure_fin`,`matiere`) VALUES (?,?,?,?,)'
+  db.query(sqlInsert,[date1,heured1,heuref1,matiere1],(err,rows)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log('inserted teacher successfully!');
+      console.log(rows);
+    }
+  })
+})
 
 
 
