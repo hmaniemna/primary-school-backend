@@ -262,13 +262,12 @@ app.get('/getTeachers',(req,res)=>{
 },[]);
 
 // DeleteTeacher
-app.delete('/deleteTeacher/:login',(req,res)=>{
+app.delete('/deleteTeacher/:id',(req,res)=>{
   const login1 = req.params.login;
   const sqlDelete = 'DELETE FROM `enseignant` WHERE `login`=?'
   db.query(sqlDelete,login1,(err,result)=>{
     if (err) console.log(err);
     console.log('teacher deleted!');  
-    console.log(id_classe);
   })
 })
 //update Teacher
