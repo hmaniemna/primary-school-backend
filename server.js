@@ -13,22 +13,43 @@ const db = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "salma",
-  database: "teacher_db",
-  port : 3001
+  database: "mydb",
+  port : 3306
 })
-/*app.post('/api/insert',(req,res)=>{
-  const sqlInsert="INSERT INTO classe (niveau,nom,nb,anneescolaire) VALUES (?,?,?,?)"
-  db.query(sqlInsert,[n,l,nb,a],(err,res)=>{
-  })
-})
-app.get('/',(req,res)=>{
-  const sqlInsert = "INSERT INTO `teacher_db`.`enseignant` (`genre`,`prenom`,`nom`,`login`,`mdp`) VALUES ('female','salma','tek','salmatek','fff');"
-  db.query(sqlInsert,(err,result)=>{
-    console.log("inserted");
-    res.send("hello world!!");
-  })
-
-})*/
+/*****/
+//get id_enseignant
+app.get('/getIdteacher',(req,res)=>{
+  const login1 = req.body.login;
+  const sqlSelect = "SELECT `id_enseignant` FROM `enseignant` WHERE `login` = ? "
+  db.query(sqlSelect,login1,(err,result)=>{
+    if(err) console.log(err);
+    console.log('nheb nmout :)')
+  });
+});
+//get id_classe
+app.get('/getIdclass',(req,res)=>{
+  const nom1 = req.body.nom;
+  const niveau1 = req.body.niveau;
+  const sqlSelect = "SELECT `id_classe` FROM `classe` WHERE (`nom`,`niveau`) VALUES (?,?) "
+  db.query(sqlSelect,[nom1,niveau1],(err,result)=>{
+    res.send(result); 
+  });
+});
+//get id_matiere
+app.get('/getIdsubject',(req,res)=>{
+  const libelle1 = req.body.libelle;
+  const sqlSelect = "SELECT `id_matiere` FROM `classe` `libelle` = ? "
+  db.query(sqlSelect,libelle1,(err,result)=>{
+    res.send(result); 
+  });
+});
+//affect Teacher
+app.post('/affectTeacher',(req,res)=>{
+  const id1 = req.body.id_enseignant;
+  const id2 = req.body.id_classe;
+  const id3 = req.body.id_matiere;
+});
+/******/
 
 //get elements from table salle 
 app.get('/salle',(res,req)=>{
@@ -38,6 +59,144 @@ app.get('/salle',(res,req)=>{
     }else{
       console.log(err)
     }
+  })
+})
+
+//Students Management
+//ADD Student
+app.post('/api/insertStudent',(req,res)=>{
+  console.log('here')
+  const id1 = req.params.id;
+  const fisrtname1=req.body.firstname
+  const lastname1=req.body.lastname
+  const gender1=req.body.gender
+  const birthdate1=req.body.birthdate
+  const inscri1=1
+  const sqlInsert="INSERT INTO `eleve` (`prenom`,`nom`,`sexe`,`date_naissance`,`num_inscription`) VALUES (?,?,?,?,?)"
+  db.query(sqlInsert,[fisrtname1,lastname1,gender1,birthdate1,id1],(err,result)=>{
+    if(err) console.log(err);
+    console.log("student inserted!!!")
+    console.log(result);
+  })
+});
+//get students
+app.get('/api/getStudents',(req,res)=>{
+  const sqlSelect="SELECT * FROM `eleve`"
+  db.query(sqlSelect,(err,result)=>{
+    console.log('students sent')
+    console.log('Data fetched')
+    res.send(result)
+  })
+})
+//Delete Students
+app.delete('/api/deleteStudent/:id',(req,res)=>{
+  const id1 = req.params.id;
+  const sqlDelete = 'DELETE FROM `eleve` WHERE `id_eleve`=?'
+  db.query(sqlDelete,id1,(err,result)=>{
+    if (err) console.log(err);
+    console.log('Student deleted!');
+    console.log(id1);  
+  })
+})
+//Update student name
+app.put('/updateStudentFirstName',(req,res)=>{
+  const id=req.body.id_eleve
+  const fisrtname1 = req.body.firstname
+  const sqlUpdate = 'UPDATE `eleve` SET `prenom`=? WHERE `id_eleve`=?'
+  db.query(sqlUpdate,[fisrtname1,id],(err,result)=>{
+    if (err) console.log(err);
+    console.log('Student name UPDATED!!');
+    console.log(result)
+  })
+})
+//Update student lastname
+app.put('/updateStudentLastname',(req,res)=>{
+  const id=req.body.id_matiere
+  const lastname1 = req.body.lastname
+  const sqlUpdate = 'UPDATE `eleve` SET `nom`=? WHERE `id_eleve`=?'
+  db.query(sqlUpdate,[lastname1,id],(err,result)=>{
+    if (err) console.log(err);
+    console.log('Student lastname UPDATED!!');
+    console.log(result)
+  })
+})
+//Update student gender
+app.put('/updateStudentGender',(req,res)=>{
+  const id=req.body.id_matiere
+  const gender1 = req.body.gender
+  const sqlUpdate = 'UPDATE `eleve` SET `sexe`=? WHERE `id_eleve`=?'
+  db.query(sqlUpdate,[gender1,id],(err,result)=>{
+    if (err) console.log(err);
+    console.log('Student gender UPDATED!!');
+    console.log(result)
+  })
+})
+//Update student birthDate
+app.put('/updateStudentBirthdate',(req,res)=>{
+  const id=req.body.id_matiere
+  const birthdate1 = req.body.birthdate
+  const sqlUpdate = 'UPDATE `eleve` SET `date_naissance`=? WHERE `id_eleve`=?'
+  db.query(sqlUpdate,[birthdate1,id],(err,result)=>{
+    if (err) console.log(err);
+    console.log('Student birthdate UPDATED!!');
+    console.log(result)
+  })
+})
+
+
+//Subject Managment
+//ADDS
+app.post('/api/insertSub',(req,res)=>{
+
+  const wording1 = req.body.wording
+  const level1=req.body.level
+  const sqlInsert="INSERT INTO `matiere` (`niveau`,`libelle`) VALUES (?,?)"
+  db.query(sqlInsert,[level1,wording1],(err,rows)=>{
+    console.log('INSERTED Subject');
+    console.log(rows);
+  })
+});
+
+//get subjects
+app.get('/api/getSub',(req,res)=>{
+  const sqlSelect="SELECT * FROM `matiere`"
+  db.query(sqlSelect,(err,result)=>{
+    console.log('SENT Subjects')
+    console.log('Data fetched')
+    res.send(result)
+  })
+})
+//Delete Sub
+app.delete('/api/deleteSub/:id',(req,res)=>{
+  const id1 = req.params.id;
+  const sqlDelete = 'DELETE FROM `matiere` WHERE `id_matiere`=?'
+  db.query(sqlDelete,id1,(err,result)=>{
+    if (err) console.log(err);
+    console.log('subj deleted!');
+    console.log(id1);  
+  })
+})
+//update subject level
+app.put('/updateSubjectLevel',(req,res)=>{
+  const id=req.body.id_matiere
+  const level1 = req.body.level
+  const sqlUpdate = 'UPDATE `matiere` SET `niveau`=? WHERE `id_matiere`=?'
+  db.query(sqlUpdate,[level1,id],(err,result)=>{
+    if (err) console.log(err);
+    console.log('Subj Level UPDATED!!');
+    console.log(result)
+  })
+})
+//Update Subject wording 
+app.put('/updateSubjectWording',(req,res)=>{
+  const id=req.body.id_matiere
+  const wording1 = req.body.wording
+  const sqlUpdate = 'UPDATE `matiere` SET `libelle`=? WHERE `id_matiere`=?'
+  db.query(sqlUpdate,[wording1,id],(err,result)=>{
+    if (err) console.log(err);
+    console.log(id)
+    console.log('subject wording UPDATED!!');
+    console.log(result)
   })
 })
 
@@ -321,17 +480,5 @@ app.put('/updateTeacherPassword',(req,res)=>{
 
 
 app.listen(port);
-console.log('app is listening on port'+port);
-
-
-
-/*app.get('/',(req,res)=>{
-  const sqlInsert= "INSERT INTO `Teachers` (`firstName`, `lastName`, `userName`, `password`,`gender`) VALUES ('sara', 'oualha','saraou','azerty','female); "
-  db.query(sqlInsert, (err,result)=>{
-    res.send('hello page !!');
-  })  
-});
-}
-)
-*/
+console.log('app is listening on port  '+port);
 
