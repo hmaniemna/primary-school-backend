@@ -20,9 +20,13 @@ const db = mysql.createPool({
 //get id_enseignant
 app.get('/getIdteacher',(req,res)=>{
   const login1 = req.body.login;
-  const sqlSelect = "SELECT `id_enseignant` FROM `enseignant` WHERE `login` = ? "
-  db.query(sqlSelect,login1,(err,result)=>{
+  const id1=req.body.id_enseignant
+  const sqlSelect = "SELECT * FROM `enseignant` WHERE `login` = ? "
+  db.query(sqlSelect,[login1],(err,result)=>{
     if(err) console.log(err);
+    
+    res.send(id1)
+    console.log(result)
     console.log('nheb nmout :)')
   });
 });
@@ -39,7 +43,7 @@ app.get('/getIdclass',(req,res)=>{
 app.get('/getIdsubject',(req,res)=>{
   const libelle1 = req.body.libelle;
   const sqlSelect = "SELECT `id_matiere` FROM `classe` `libelle` = ? "
-  db.query(sqlSelect,libelle1,(err,result)=>{
+  db.query(sqlSelect,[libelle1],(err,result)=>{
     res.send(result); 
   });
 });
@@ -392,14 +396,15 @@ app.get('/getTeachers',(req,res)=>{
   });
 });
 //get one teacher 
-app.get('/getTeacher/:id',(req,res)=>{
-  const id1 = req.params.id;
-  const sqlSelect = "SELECT `id_enseignant`,`prenom`,`nom`,`login`,`mdp` FROM `enseignant` WHERE `id_enseignant`=?"
-  db.query(sqlSelect,id1,(err,result)=>{
+app.get('/getTeacher/',(req,res)=>{
+  const login1 = req.params.username;
+  const sqlSelect = "SELECT * FROM `enseignant` WHERE `login`=?"
+  db.query(sqlSelect,login1,(err,result)=>{
     res.send(result); 
-    console.log(id1)
+    console.log(login1)
     console.log("??????????????????????");
   });
+  console.log('im in')
 });
 
 // DeleteTeacher
